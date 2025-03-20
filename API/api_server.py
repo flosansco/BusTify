@@ -35,6 +35,7 @@ class Simulation:
     async def more_functions_here():
         log.d("You can add more functions here")
 
+
 # Point d'entrée pour Uvicorn
 # Lancer le serveur avec : uvicorn api_server:app --reload
 log.i("Please launch simulation with `uvicorn api_server:app --reload`")
