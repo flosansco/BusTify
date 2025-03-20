@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        input, select, button { margin: 10px; padding: 8px; font-size: 16px; }
+        #result { font-weight: bold; margin-top: 20px; }
+    </style>
+  <title>BusTify - Simulation Thermique</title>
+</head>
+<body>
+  <h1>Simulation Thermique - BusTify</h1>
+
+  <!-- Formulaire pour saisir les données -->
+  <form id="simulation-form">
+    <label for="temperature">Température extérieure (°C) :</label>
+    <input type="number" id="temperature" name="temperature" required />
+    <br />
+
+    <label for="humidity">Humidité (%) :</label>
+    <input type="number" id="humidity" name="humidity" required />
+    <br />
+
+    <label for="passengers">Nombre de passagers :</label>
+    <input type="number" id="passengers" name="passengers" required />
+    <br />
+
+    <button type="submit">Lancer la Simulation</button>
+  </form>
+
+  <!-- Affichage du résultat -->
+  <p id="result"></p>
+
+  <!-- Lien vers le fichier JS -->
+  <script src="script.js"></script>
+</body>
+</html>

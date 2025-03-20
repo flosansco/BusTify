@@ -1,37 +1,42 @@
-from fastapi import FastAPI
-from Simulation.SimulationRequest import SimulationRequest
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from Simulation.SimulationRequest import SimulationRequest
+from LoggerManager.Logger import log
 
 
-# Création de l'application FastAPI
-app = FastAPI()
+class Simulation:
+    def __init__(self):
+        self.app = FastAPI()
+        self.setup_routes()
 
-# Autoriser le frontend (CORS pour éviter les erreurs de connexion)
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Permet à tous les domaines d'accéder à l'API (à restreindre en prod)
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+        self.app.add_middleware(
+            CORSMiddleware,  # ignore warning
+            allow_origins=["*"],  # Permet à tous les domaines d'accéder à l'API (à restreindre en prod)
+            allow_credentials=True,
+            allow_methods=["*"],
+            allow_headers=["*"],)
 
-# Endpoint pour la simulation
-@app.post("/simulate")
-def simulate(data: SimulationRequest):
+    def setup_routes(self):
+        self.app.post("/simulate")(self.simulate)
 
-    # Ici remplacer par des fonctions à dfinir qui vont faire les calculs
-    # Quelque chose comme :
-        # calculs = Calculs(inputs)
-        # calculs.process()
+    @staticmethod
+    async def simulate(data: SimulationRequest):
+        try:
+            result_message = f"Simulation réussie pour {data.passengers} passagers avec {data.temperature}°C et {data.humidity}% d'humidité."
+            return {"message": result_message}
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
-    # Simulation simple de température de batterie
-    if data.type_refroidissement == "air":
-        temperature_batterie = data.temperature_ext + 5
-    elif data.type_refroidissement == "liquide":
-        temperature_batterie = data.temperature_ext + 3
-    else:
-        temperature_batterie = data.temperature_ext + 1  # CPM plus efficace
+    @staticmethod
+    async def save_scenario(scenario):
+        log.i("Saving scenario <id> with params <params>")
 
-    return {"temperature_batterie": temperature_batterie}
+    @staticmethod
+    async def more_functions_here():
+        log.d("You can add more functions here")
 
+# Point d'entrée pour Uvicorn
 # Lancer le serveur avec : uvicorn api_server:app --reload
+log.i("Please launch simulation with `uvicorn api_server:app --reload`")
+simulation = Simulation()
+app = simulation.app

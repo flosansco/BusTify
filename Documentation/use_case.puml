@@ -1,22 +1,33 @@
 @startuml
 'https://plantuml.com/use-case-diagram
 
-:Main Admin: as Admin
-(Use the application) as (Use)
+:Simulator:
+(display main page)
+(calculate with inputs)
 
-User -> (Start)
-User --> (Use)
+:User:
+(Start application) as (start)
+(Create new scenario)
+(Load scenario)
+(Choose cooling system)
+(Select environment)
 
-Admin ---> (Use)
+User -> (start)
+User --> (Create new scenario)
+User --> (Load scenario)
+User --> (Choose cooling system)
+User --> (Select environment)
+User --> Simulator
 
-note right of Admin : This is an example.
+top to bottom direction
+Simulator -> (display main page)
+Simulator -> (calculate with inputs)
 
-note right of (Use)
-A note can also
-be on several lines
+note left of User : Simulator user.
+
+note left of (Select environment)
+Select temperature
+Select humidity
 end note
 
-note "This note is connected\nto several objects." as N2
-(Start) .. N2
-N2 .. (Use)
 @enduml
