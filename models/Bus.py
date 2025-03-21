@@ -1,5 +1,5 @@
 from models.Battery import Battery
-from models.Trajet import Traject
+from models.Traject import Traject
 
 
 class Bus:
