@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+
 # Définition du modèle des données envoyées par le frontend
 class SimulationRequest(BaseModel):
     # environnement: Environnement
