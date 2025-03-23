@@ -1,0 +1,69 @@
+{
+  "consumption_model": {
+    "bus_characteristics": {
+      "empty_mass": 0.0,
+      "passenger_count": 0,
+      "avg_passenger_mass": 0.0,
+      "battery_capacity": 0.0,
+      "battery_mass_density": 0.0,
+      "frontal_area": 0.0,
+      "door_count": 0,
+      "door_size": 0.0,
+      "energy_recovery_rate": 0.0,
+      "hvac_power": 0.0,
+      "auxiliary_power": 0.0
+    },
+    "dynamics": {
+      "speed": 0.0,
+      "acceleration": 0.0,
+      "boarding_rate": 0.0
+    },
+    "road_characteristics": {
+      "slope": 0.0,
+      "curvature_radius": 0.0,
+      "rolling_coefficient": 0.0,
+      "drag_coefficient": 0.0
+    },
+    "environmental_data": {
+      "external_temperature": 0.0
+    },
+    "output": {
+      "power_consumed": []
+    }
+  },
+  "battery_part": {
+    "input": {
+      "voltage": 0.0,
+      "current": 0.0,
+      "temperature": 0.0,
+      "cycle_count": 0,
+      "elapsed_time": 0.0,
+      "soc": 0.0,
+      "soh": 0.0
+    },
+    "output": {
+      "soc": 0.0,
+      "soh": 0.0
+    }
+  },
+  "bus_network_simulation": {
+    "input": {
+      "gtfs": {
+        "trips": [],
+        "routes": []
+      },
+      "bus_count": 0,
+      "daily_services": [],
+      "charging_stations": [],
+      "charger_power": 0.0,
+      "bus_characteristics": "Refer to consumption_model",
+      "charging_strategy": "Rule-based",
+      "passenger_flow": []
+    },
+    "output": {
+      "bus_power_consumption": [],
+      "network_power_demand": [],
+      "charging_delay": []
+    }
+  }
+}

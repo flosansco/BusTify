@@ -1,26 +1,38 @@
-import os
-
-from models.Trajet import Traject
-from models.Points import Point
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from Simulation.SimulationRequest import SimulationRequest
 from LoggerManager.Logger import log
 
 
-class Routine:
-
+class Simulation:
     def __init__(self):
-        log.i(f"Creating new instance of {self.__class__} ")
+        self.app = FastAPI()
+        self.setup_routes()
+
+        self.app.add_middleware(
+            CORSMiddleware,  # ignore warning
+            allow_origins=["*"],  # Permet à tous les domaines d'accéder à l'API (à restreindre en prod)
+            allow_credentials=True,
+            allow_methods=["*"],
+            allow_headers=["*"],)
+
+    def setup_routes(self):
+        self.app.post("/simulate")(self.simulate)
 
     @staticmethod
-    def run_routine(routines):
-        print(f"Running routine : {routines}")
+    async def simulate(data: SimulationRequest):
+        try:
+            result_message = f"Simulation réussie pour {data.passengers} passagers avec {data.temperature}°C et {data.humidity}% d'humidité."
+            return {"message": result_message}
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     @staticmethod
-    def create_traject():
-        log.d("Hello")
-        log.i("Hello")
-        log.e("Hello")
-        log.w("Hello")
+    async def save_scenario(scenario):
+        log.i("Saving scenario <id> with params <params>")
+
+    @staticmethod
+    async def more_functions_here():
+        log.d("You can add more functions here")
 
 
-if __name__ == '__main__':
-    Routine()
