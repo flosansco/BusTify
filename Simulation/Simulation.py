@@ -32,7 +32,7 @@ class Simulation:
         """
         try:
             log.d(f"Données reçues : {request.model_dump()}")
-            log.i("Calcul des consommations")
+            log.i("Calcul des consommations HVAC uniquement")
 
             # Simuler la consommation (remplacer par une vraie logique plus tard)
             hvac = HVAC()

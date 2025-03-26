@@ -20,7 +20,7 @@ class HVAC:
     """
     pac_consumption: float
     acs_consumption: float
-    btms_consumption: float
+    btms_consumption: float  # à coupler avec la batterie ?
 
 
     @staticmethod
