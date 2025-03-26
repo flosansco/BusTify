@@ -1,4 +1,8 @@
-class Battery:
+
+
+
+
+class Environment:
     def __init__(self, initial_in_temperature: float, out_temperature:float, humidity:float):
 
         self.initial_in_temperature = initial_in_temperature

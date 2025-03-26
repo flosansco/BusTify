@@ -1,36 +1,36 @@
-document.getElementById('simulation-form').addEventListener('submit', function(event) {
-  // Empêcher la soumission classique du formulaire
-  event.preventDefault();
+document.getElementById('simulation-form').addEventListener('submit', function (event) {
+  event.preventDefault(); // Empêche le rechargement de la page
 
-  // Récupérer les données du formulaire
-  const temperature = document.getElementById('temperature').value;
-  const humidity = document.getElementById('humidity').value;
-  const passengers = document.getElementById('passengers').value;
+  console.log('Simulation lancée. En attente des résultats...');
 
-  const data = {
-    temperature: parseFloat(temperature),
-    humidity: parseFloat(humidity),
-    passengers: parseInt(passengers)
+  const request = {
+    busType: document.getElementById('bus-type').value,
+    routeName: document.getElementById('route-name').value,
+    temperature: parseFloat(document.getElementById('temperature').value),
+    humidity: parseFloat(document.getElementById('humidity').value),
+    coolingType: document.getElementById('cooling-type').value,
+    optimization: document.getElementById('optimization').value
   };
 
-  // Envoyer les données en POST vers le backend
   fetch('http://127.0.0.1:8000/simulate', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
+    body: JSON.stringify(request)
   })
   .then(response => {
     if (!response.ok) {
-      throw new Error(`Erreur serveur: ${response.status}`);
+      throw new Error('Erreur réseau ou serveur.');
     }
     return response.json();
   })
   .then(result => {
-    document.getElementById('result').textContent =
-    `Résultat : ${result.message
-    || 'Pas de message reçu'}`;
+    document.getElementById('pac-consumption').textContent = result.pacConsumption.toFixed(2);
+    document.getElementById('acs-consumption').textContent = result.acsConsumption.toFixed(2);
+    document.getElementById('btms-consumption').textContent = result.btmsConsumption.toFixed(2);
+    document.getElementById('total-consumption').textContent = result.totalConsumption.toFixed(2);
   })
   .catch(error => {
-    document.getElementById('result').textContent = `Erreur : ${error.message}`;
+    console.error('Erreur :', error);
+    alert('Une erreur est survenue lors de la simulation.');
   });
 });

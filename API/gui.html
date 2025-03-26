@@ -1,37 +1,66 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        body { font-family: Arial, sans-serif; text-align: left; margin-top: 50px; }
         input, select, button { margin: 10px; padding: 8px; font-size: 16px; }
         #result { font-weight: bold; margin-top: 20px; }
     </style>
-  <title>BusTify - Simulation Thermique</title>
+    <title>BusTify - Simulation Thermique</title>
 </head>
 <body>
-  <h1>Simulation Thermique - BusTify</h1>
+<h1>BusTify - Simulation Thermique</h1>
 
-  <!-- Formulaire pour saisir les données -->
-  <form id="simulation-form">
-    <label for="temperature">Température extérieure (°C) :</label>
-    <input type="number" id="temperature" name="temperature" required />
-    <br />
+<!-- Formulaire pour les paramètres du bus -->
+<form id="simulation-form">
+
+    <label for="route-name">Nom du Trajet :</label>
+    <input type="text" id="route-name" required/><br/>
+
+    <label for="bus-type">Type de Bus :</label>
+    <select id="bus-type">
+        <option value="standard">Standard</option>
+        <option value="electrique">Électrique</option>
+        <option value="hybride">Hybride</option>
+    </select><br/>
+
+    <label for="temperature">Température Extérieure (°C) :</label>
+    <input type="number" id="temperature" required/><br/>
 
     <label for="humidity">Humidité (%) :</label>
-    <input type="number" id="humidity" name="humidity" required />
-    <br />
+    <input type="number" id="humidity" required/><br/>
 
-    <label for="passengers">Nombre de passagers :</label>
-    <input type="number" id="passengers" name="passengers" required />
-    <br />
+    <label for="cooling-type">Type de Refroidissement :</label>
+    <select id="cooling-type">
+        <option value="air">Air</option>
+        <option value="liquide">Liquide</option>
+        <option value="cpm">CPM</option>
+    </select><br/>
 
+    <label for="optimization">Optimisation :</label>
+    <select id="optimization">
+        <option value="confort">Confort des Passagers</option>
+        <option value="performance">Consommation Optimale</option>
+    </select><br/>
+
+    <!-- Boutons pour gérer les scénarios -->
+    <button type="button" onclick="saveScenario()">Enregistrer le Scénario</button>
+    <button type="button" onclick="loadScenario()">Charger un Scénario</button>
+
+    <!--Type submit pour submit un formulaire et envoyer les données aux backend-->
     <button type="submit">Lancer la Simulation</button>
-  </form>
+</form>
 
-  <!-- Affichage du résultat -->
-  <p id="result"></p>
+<!-- Affichage des résultats -->
+<h2>Résultats</h2>
+<div id="results">
+    <p><strong>Consommation PAC :</strong> <span id="pac-consumption">-</span> kWh</p>
+    <p><strong>Consommation ACS :</strong> <span id="acs-consumption">-</span> kWh</p>
+    <p><strong>Consommation BTMS :</strong> <span id="btms-consumption">-</span> kWh</p>
+    <p><strong>Consommation Totale du Bus :</strong> <span id="total-consumption">-</span> kWh</p>
+</div>
 
   <!-- Lien vers le fichier JS -->
   <script src="script.js"></script>

@@ -1,0 +1,10 @@
+{
+  "Scenario1": {
+    "name": "Un super trajet",
+    "bus_type": "Electric",
+    "out_temperature": "25°",
+    "humidity": "20%",
+    "cooling": "air",
+    "optimisation": "comfort"
+  }
+}
