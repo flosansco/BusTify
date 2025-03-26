@@ -1,4 +1,5 @@
 from enums.Enums import TypeId
+from LoggerManager.Logger import log
 
 
 class Point:
@@ -9,4 +10,4 @@ class Point:
 
     @staticmethod
     def _get_position(lat, long, elevation):
-        print("OneStreetMap will do it I guess ?")
+        log.i("OneStreetMap ?")

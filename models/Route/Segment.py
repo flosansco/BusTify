@@ -1,4 +1,4 @@
-from models.Points import Point
+from models.Route.Points import Point
 from LoggerManager.Logger import log
 
 

@@ -1,4 +1,4 @@
-from models.Segment import Segment
+from models.Route.Segment import Segment
 
 
 class Traject:

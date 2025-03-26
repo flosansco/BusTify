@@ -1,2 +1,4 @@
 **/*.pdf
-**/*.pycgit a
+*.pyc
+__pycache__/
+

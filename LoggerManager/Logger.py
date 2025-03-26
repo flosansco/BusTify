@@ -30,7 +30,7 @@ class Logger:
         def format(self, record):
             log_color = Logger.COLORS.get(record.levelname, Logger.COLORS['RESET'])
             reset_color = Logger.COLORS['RESET']
-            return f"{log_color}{record.levelname}: {record.getMessage()}{reset_color}"
+            return f"{log_color}{record.levelname}:\t  {record.getMessage()}{reset_color}"
 
     def d(self, message):
         self.logger.debug(message)

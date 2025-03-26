@@ -1,10 +1,14 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from Simulation.SimulationRequest import SimulationRequest
+from models.EnergySystems.HVAC import HVAC
 from LoggerManager.Logger import log
 
 
 class Simulation:
+    """
+
+    """
     def __init__(self):
         self.app = FastAPI()
         self.app.post("/simulate")(self.simulate)
@@ -19,24 +23,27 @@ class Simulation:
     @staticmethod
     async def simulate(request: SimulationRequest):
         """
-        Fonction qui sera exécutée via l'appel javascript en cliquant sur un bouton
+        Fonction qui sera exécutée via l'appel javascript en cliquant sur le bouton "Lancer la simulation"
 
-        :param SimulationRequest request: l'ensemble des données utilisées par le backend qui seront envoyées au frontend
+
+
+        :param SimulationRequest request: l'ensemble des données utilisées par le backend qui seront
+                envoyées au frontend. Doit absolument correspondre aux données déclarées dans le .js
         """
         try:
-            log.d("Calcul des consommations")
+            log.d(f"Données reçues : {request.model_dump()}")
+            log.i("Calcul des consommations")
+
             # Simuler la consommation (remplacer par une vraie logique plus tard)
-            pac_consumption = 20 + request.temperature / 5
-            acs_consumption = 15 + request.humidity / 10
-            btms_consumption = 10 if request.coolingType == "air" else 5
+            hvac = HVAC()
+            total_hvac_consumption = hvac.get_pac_consumption() + hvac.get_acs_consumption() + hvac.get_btms_consumption()
 
-            total_consumption = pac_consumption + acs_consumption + btms_consumption
-
+            # Réponse renvoyée au frontend (js)
             return {
-                "pacConsumption": pac_consumption,
-                "acsConsumption": acs_consumption,
-                "btmsConsumption": btms_consumption,
-                "totalConsumption": total_consumption
+                "pacConsumption": hvac.get_pac_consumption(),
+                "acsConsumption": hvac.get_acs_consumption(),
+                "btmsConsumption": hvac.get_btms_consumption(),
+                "totalConsumption": total_hvac_consumption
             }
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
@@ -54,6 +61,9 @@ class Simulation:
     @staticmethod
     def save_scenario(scenario):
         log.i("Saving scenario <id> with params <params>")
+
+    def display_graph(self):
+        log.i("Affichage de graph avec plt")
 
 
     @staticmethod

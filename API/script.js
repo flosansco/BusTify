@@ -3,6 +3,7 @@ document.getElementById('simulation-form').addEventListener('submit', function (
 
   console.log('Simulation lancée. En attente des résultats...');
 
+  // Doit correspondre à la classe python SimulationRequest
   const request = {
     busType: document.getElementById('bus-type').value,
     routeName: document.getElementById('route-name').value,
@@ -23,6 +24,7 @@ document.getElementById('simulation-form').addEventListener('submit', function (
     }
     return response.json();
   })
+  // Ici la réponse du backend (python) après calculs
   .then(result => {
     document.getElementById('pac-consumption').textContent = result.pacConsumption.toFixed(2);
     document.getElementById('acs-consumption').textContent = result.acsConsumption.toFixed(2);

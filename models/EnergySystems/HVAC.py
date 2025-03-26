@@ -15,15 +15,25 @@ class HVAC:
      La quantité d'air frais requise dépend du nombre de passagers à l'intérieur du BEB. Dans
     le modèle, quatre niveaux d'occupation des passagers sont définis dans le contrôleur de l'unité
     HVAC : (1) Très faible : <10 passagers, (2) Faible : <25 passagers, (3) Moyen : <40 passagers,
-    (4) Elevé:> 40 passagers
+    (4) Elevé : >40 passagers.
 
     """
+    pac_consumption: float
+    acs_consumption: float
+    btms_consumption: float
 
 
-    def __init__(self):
-        print(1)
+    @staticmethod
+    def get_pac_consumption():
+        pac_consumption = 100  # GW.h
+        return pac_consumption
 
+    @staticmethod
+    def get_acs_consumption():
+        acs_consumption = 200  # GW.h
+        return acs_consumption
 
-    def get_consumption(self):
-        consumption = 1  # GW.h
-        return consumption
+    @staticmethod
+    def get_btms_consumption():
+        btms_consumption = 300  # GW.h
+        return btms_consumption

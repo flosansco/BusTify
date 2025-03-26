@@ -1,7 +1,7 @@
 from models.EnergySystems.Battery import Battery
 from models.EnergySystems.Propulsion import Propulsion
 from models.EnergySystems.HVAC import HVAC
-from models.Traject import Traject
+from models.Route.Traject import Traject
 from LoggerManager.Logger import log
 import json
 
